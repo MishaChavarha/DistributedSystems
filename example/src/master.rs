@@ -1,12 +1,13 @@
 use tonic::{transport::Server, Request, Response, Status};
 
-use example::greeter_server::{Greeter, GreeterServer};
-use example::{HelloReply, HelloRequest};
-
 pub mod example {
     tonic::include_proto!("example"); // The string specified here must match the proto package name
 }
-    
+// use example::greeter_server::GreeterServer;
+use example::greeter_server::{Greeter, GreeterServer};
+use example::{HelloReply, HelloRequest};
+
+
 #[derive(Debug, Default)]
 pub struct MyGreeter {}
 
@@ -32,6 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = "192.168.50.232:50051".parse()?;
     let greeter = MyGreeter::default();
 
+    println!("Server is running");
     Server::builder()
         .add_service(GreeterServer::new(greeter))
         .serve(addr)
