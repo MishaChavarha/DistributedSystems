@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package example;
+
+// The greeting service definition.
+service Greeter {
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+}
+
+// The response message containing the greetings
+message HelloReply {
+}
