@@ -1,0 +1,38 @@
+syntax = "proto3";
+package mapreduce;
+
+enum WorkerStatus {
+    WORKER_STATUS_IDLE = 0;
+    WORKER_STATUS_IN_PROGRESS = 1; 
+    WORKER_STATUS_COMPLETED = 2; 
+}
+
+// The greeting service definition.
+service MapReduce {
+  // Sends a greeting
+  // rpc SayHello (HelloRequest) returns (HelloReply) {}\
+  rpc GetWorkerStatus (StatusRequest) returns (StatusResponse){}
+  rpc Map (MapRequest) returns (MapResponse){}
+  // rpc Map (MapRequest) returns (MapResponse){}
+//   rpc Reduce (ReduceRequest) returns (ReduceResponse){}
+}
+
+
+message StatusRequest {}
+message StatusResponse {
+    WorkerStatus status = 1; 
+}
+
+message MapRequest {
+    repeated string files = 1;
+}
+message MapResponse {
+    repeated string intermediate = 1;
+}
+
+// message ReduceRequest {
+//     repeated string files = 1; 
+// }
+// message ReduceResponse {
+//     repeated string intermediate = 1;
+// }
