@@ -1,6 +1,6 @@
 // use tonic::{transport::Server, Request, Response, Status};
 // use std::{env, process::exit};
-use std::iter::Iterator;
+use std::{iter::Iterator, print};
 use std::net::SocketAddr;
 
 pub mod mapreduce {
@@ -14,6 +14,9 @@ extern crate clap;
 
 use clap::{Arg,App,SubCommand};
 
+// define submodules of master that contain information how to  
+mod mr_master;
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
@@ -21,7 +24,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         let result = server_ip.parse::<SocketAddr>();
         match result {
             Ok(addr) => return Ok(()),
-            _ => return Err(String::from("one of the values is not valid socket address"))
+            Err(addr) => {
+                let ret_string = format!("{} {}",server_ip,"is invalid IP address format");
+                // let message = String::from(" is invalid IP addrress format");
+                return Err(ret_string)}
         };
     };
 
@@ -51,6 +57,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut addrs = mr_master.values_of("workers").unwrap().collect::<Vec<&str>>();
     println!("{:?}",addrs);
+
+    // iterate through the list of sockete addresses and connect to the corresponding server; 
+    // keep a list of workers. For each file in the folder assign it to a worker. 
+    // for each worker
 
 
 

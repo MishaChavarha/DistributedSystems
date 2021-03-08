@@ -19,6 +19,7 @@ service MapReduce {
 
 
 message StatusRequest {}
+
 message StatusResponse {
     WorkerStatus status = 1; 
 }

@@ -1,2 +1,2 @@
 # MapReduceRS
-Collection of DS projects. 
+Collection of distributed systems projects. 
